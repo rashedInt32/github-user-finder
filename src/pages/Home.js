@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import { searchUser } from "../api/endPoints";
 
-import WithLoading from '../hoc/WithLoading';
+import WithLoading from "../hoc/WithLoading";
 import Search from "../components/Search";
-import Loader from "../components/Loader";
+import UserCard from "../components/UserCard";
 
 const Home = () => {
   const [userName, setUserName] = useState("");
@@ -25,6 +25,8 @@ const Home = () => {
     [err, response] = await searchUser(userName);
     if (err) return err.resopnse;
 
+    console.log(response.data);
+
     setUsers(response.data.items);
     setLoading(false);
   };
@@ -38,9 +40,17 @@ const Home = () => {
       />
 
       <WithLoading loading={loading}>
-        {users && users.map(user =>
-          <div>{user.login}</div>
-        )}
+        <div className="card-holder row pt-5">
+          {users &&
+            users.map(user => (
+              <UserCard
+                key={user.id}
+                name={user.login}
+                avatar={user.avatar_url}
+                publicUrl={user.html_url}
+              />
+            ))}
+        </div>
       </WithLoading>
     </div>
   );
