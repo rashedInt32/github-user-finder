@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { searchUser } from "../api/endPoints";
 
+import WithLoading from '../hoc/WithLoading';
 import Search from "../components/Search";
 import Loader from "../components/Loader";
 
@@ -36,11 +37,11 @@ const Home = () => {
         onKeyUp={getUser}
       />
 
-      {loading ? (
-        <Loader />
-      ) : (
-        users && users.map(user => <div>{user.login}</div>)
-      )}
+      <WithLoading loading={loading}>
+        {users && users.map(user =>
+          <div>{user.login}</div>
+        )}
+      </WithLoading>
     </div>
   );
 };
