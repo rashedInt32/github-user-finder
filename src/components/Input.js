@@ -5,9 +5,10 @@ const Input = props => (
     <input
       value={props.value}
       type={props.type}
+      onChange={props.onChange}
       onKeyUp={props.onKeyUp}
       name={props.name}
-      className="form-control"
+      className="form-control form-control-lg"
       placeholder={props.placeholder}
     />
   </div>

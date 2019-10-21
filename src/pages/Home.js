@@ -1,9 +1,48 @@
-import React from 'react';
+import React, { useState } from "react";
+
+import { searchUser } from "../api/endPoints";
+
+import Search from "../components/Search";
+import Loader from "../components/Loader";
 
 const Home = () => {
-  return(
-    <div>Home</div>
-  )
-}
+  const [userName, setUserName] = useState("");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  let err, response;
+
+  const onChangeInput = e => setUserName(e.target.value);
+
+  const getUser = async () => {
+    setLoading(true);
+    if (userName === "") {
+      setLoading(false);
+      return setUsers([]);
+    }
+
+    [err, response] = await searchUser(userName);
+    if (err) return err.resopnse;
+
+    setUsers(response.data.items);
+    setLoading(false);
+  };
+
+  return (
+    <div className="container pt-5">
+      <Search
+        inputValue={userName}
+        onChange={onChangeInput}
+        onKeyUp={getUser}
+      />
+
+      {loading ? (
+        <Loader />
+      ) : (
+        users && users.map(user => <div>{user.login}</div>)
+      )}
+    </div>
+  );
+};
 
 export default Home;
