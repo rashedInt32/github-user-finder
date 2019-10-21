@@ -22,7 +22,6 @@
   position: relative;
   width: 100px;
   height: 100px;
-  background-color: #09d3ac;
   border-radius: 4px;
   box-shadow: 0 0 0 1px rgba(0,0,0, .05);
   overflow: hidden;
@@ -51,6 +50,25 @@
 
 .modal .modal-header {
   border-bottom: 0;
+}
+
+.user-details  {
+  position: relative;
+  padding: 0 20px 30px;
+}
+.user-details .basic-info {
+  display: flex;
+}
+.user-details .basic-info .avatar {
+  width: 150px;
+  height: 150px;
+  flex: 0 0 150px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0,0,0, .05);
+}
+
+.user-details .basic-info .details {
+  padding-left: 20px;
 }
 
 

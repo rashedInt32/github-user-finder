@@ -11,8 +11,12 @@ const UserDetails = (props) => {
       <div className="basic-info">
         <div className="avatar" style={style}></div>
         <div className="details">
-          <h3>{props.name}</h3>
-          <p className="text-mutes">@{props.login}</p>
+          {props.name !== null ?
+            <h4 className="mb-0">{props.name}</h4>
+            : <h4 className="mb-0">{props.login}</h4>
+          }
+          <small className="text-mutes">@{props.login}</small>
+          {props.bio ? <p>{props.bio}</p> : null}
         </div>
       </div>
     </div>
