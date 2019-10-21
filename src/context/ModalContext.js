@@ -5,12 +5,7 @@ export const ModalContext = createContext();
 const ModalContextProvider = props => {
   const [show, setShow] = useState(false);
 
-  const openModal = () => {
-    console.log("open modal");
-    console.log(show);
-    setShow(true);
-  };
-
+  const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
 
   return (

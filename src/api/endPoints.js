@@ -3,10 +3,22 @@ import { config } from '../config/config';
 import { http } from '../http';
 
 
-const searchUser = async user => {
-  return await to(
+const searchUser = async user => await to(
     http.get(`search/users?q=${user}&access_token=${config.appToken}`)
   );
-}
 
-export { searchUser };
+const getUser = async userName =>
+  await to(
+    http.get(
+      `/users/${userName}`
+    )
+  );
+
+const getUserRepos = async userName =>
+  await to(
+    http.get(
+      `https://api.github.com/users/${userName}/repos?per_page=10&sort=created:asc`
+    )
+  );
+
+export { searchUser, getUser, getUserRepos };

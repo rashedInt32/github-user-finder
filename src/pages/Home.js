@@ -1,57 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import { searchUser } from "../api/endPoints";
+import { searchUser, getUser, getUserRepos } from "../api/endPoints";
+
+import { ModalContext } from "../context/modalContext";
 
 import WithLoading from "../hoc/WithLoading";
 import Search from "../components/Search";
 import UserCard from "../components/UserCard";
+import Modal from '../components/Modal';
+import UserDetails from '../components/UserDetails';
 
 const Home = () => {
-  const [userName, setUserName] = useState("");
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [text, setText] = useState('');
+  const [state, setState] = useState({
+    loading: false,
+    userLoading: false,
+    users: [],
+    user: {},
+    repos: []
+  })
+
+  const { show, openModal, closeModal } = useContext(ModalContext);
 
   let err, response;
 
-  const onChangeInput = e => setUserName(e.target.value);
+  const onChangeInput = e => setText(e.target.value);
 
-  const getUser = async () => {
-    setLoading(true);
-    if (userName === "") {
-      setLoading(false);
-      return setUsers([]);
+  const searchUsers = async () => {
+    setState({ ...state, loading: true });
+    if (state.text === "") {
+      return setState({...state, users: [], loading: false});
     }
 
-    [err, response] = await searchUser(userName);
+    [err, response] = await searchUser(text);
     if (err) return err.resopnse;
 
-    console.log(response.data);
+    setState({ ...state, users: response.data.items, loading: false });
+  };
 
-    setUsers(response.data.items);
-    setLoading(false);
+  const singleUser = async user => {
+    openModal();
+    setState({ ...state, userLoading: true });
+
+    const [errorUser, responseUser] =
+      await getUser(user.login);
+
+    const [errorRepos, responseRepos] = await getUserRepos(user.login);
+
+    if (errorUser || errorRepos) return;
+    setState({
+      ...state,
+      user: responseUser.data,
+      repos: responseRepos.data,
+      userLoading: false
+    });
   };
 
   return (
-    <div className="container pt-5">
+    <div className="container pt-5 pb-5">
       <Search
-        inputValue={userName}
+        inputValue={text}
         onChange={onChangeInput}
-        onKeyUp={getUser}
+        onKeyUp={searchUsers}
       />
 
-      <WithLoading loading={loading}>
+      <WithLoading loading={state.loading}>
         <div className="card-holder row pt-5">
-          {users &&
-            users.map(user => (
+          {state.users &&
+            state.users.map(user => (
               <UserCard
                 key={user.id}
                 name={user.login}
                 avatar={user.avatar_url}
                 publicUrl={user.html_url}
+                onClickUser={() => singleUser(user)}
               />
             ))}
         </div>
       </WithLoading>
+
+      <Modal show={show} close={closeModal} loading={state.userLoading}>
+        <UserDetails name={state.user.name}/>
+      </Modal>
     </div>
   );
 };

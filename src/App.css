@@ -37,6 +37,22 @@
   font-weight: bold;
 }
 
+.modal {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0,0,0, .4);
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal .modal-header {
+  border-bottom: 0;
+}
+
 
 .spinner {
   margin: 100px auto;

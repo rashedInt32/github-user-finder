@@ -21,7 +21,12 @@ const UserCard = (props) => {
             Public Profile
           </a>
 
-          <button className="btn btn-primary btn-sm">View Details</button>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={props.onClickUser}
+          >
+            View Details
+          </button>
         </div>
       </div>
     </div>
