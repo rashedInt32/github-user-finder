@@ -1,4 +1,5 @@
 import React from 'react';
+import RepoCard from './RepoCard';
 
 const UserDetails = (props) => {
   const style = {
@@ -40,6 +41,19 @@ const UserDetails = (props) => {
             </span>
           </div>
         </div>
+      </div>
+
+      <div className="repos pt-4">
+        {props.repos.map(repo => (
+          <RepoCard
+            key={repo.node_id}
+            name={repo.name}
+            html_url={repo.html_url}
+            description={repo.description}
+            language={repo.language}
+          />
+
+        ))}
       </div>
     </div>
   );

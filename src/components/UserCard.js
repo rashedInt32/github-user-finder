@@ -1,8 +1,8 @@
 import React from 'react';
 
-const UserCard = (props) => {
+const UserCard = ({name, publicUrl, onClickUser, avatar}) => {
   const style = {
-    background: `url(${props.avatar}) center center no-repeat`,
+    background: `url(${avatar}) center center no-repeat`,
     backgroundSize: 'cover'
   };
 
@@ -11,9 +11,9 @@ const UserCard = (props) => {
       <div className="user-card d-flex">
         <div className="avatar" style={style}></div>
         <div className="card-details d-flex flex-column align-items-start">
-          <h5 className="pb-1">{props.name}</h5>
+          <h5 className="pb-1">{name}</h5>
           <a
-            href={props.publicUrl}
+            href={publicUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-dark btn-sm mb-1"
@@ -23,7 +23,7 @@ const UserCard = (props) => {
 
           <button
             className="btn btn-primary btn-sm"
-            onClick={props.onClickUser}
+            onClick={onClickUser}
           >
             View Details
           </button>

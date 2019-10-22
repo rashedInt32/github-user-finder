@@ -90,6 +90,7 @@ const Home = () => {
           followers={user.followers}
           following={user.following}
           public_repos={user.public_repos}
+          repos={repos}
         />
       </Modal>
     </div>

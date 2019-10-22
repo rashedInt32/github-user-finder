@@ -17,7 +17,7 @@ const getUser = async userName =>
 const getUserRepos = async userName =>
   await to(
     http.get(
-      `https://api.github.com/users/${userName}/repos?per_page=10&sort=created:asc`
+      `https://api.github.com/users/${userName}/repos?sort=created:asc`
     )
   );
 
