@@ -1,9 +1,14 @@
 
-## Available Scripts
+## Run project locally
 
-In the project directory, you can run:
+Rename `.env.example` to `.env`
 
-### `yarn start`
+Generate github app token to avoid request limit error, as it send request when user type.
+
+Script
+
+    $yarn install
+    $yarn start
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
