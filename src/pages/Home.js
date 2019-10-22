@@ -86,6 +86,10 @@ const Home = () => {
           login={user.login}
           avatar={user.avatar_url}
           bio={user.bio}
+          blog={user.blog}
+          followers={user.followers}
+          following={user.following}
+          public_repos={user.public_repos}
         />
       </Modal>
     </div>
