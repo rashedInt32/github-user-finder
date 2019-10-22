@@ -2,7 +2,11 @@ import React, { createContext, useState } from "react";
 
 export const ModalContext = createContext();
 
-const ModalContextProvider = props => {
+/**
+ * ModalContext
+ * @desc responsible for modal open close and showing state
+ */
+const ModalContextProvider = ({children}) => {
   const [show, setShow] = useState(false);
 
   const openModal = () => setShow(true);
@@ -10,7 +14,7 @@ const ModalContextProvider = props => {
 
   return (
     <ModalContext.Provider value={{ show, openModal, closeModal }}>
-      {props.children}
+      {children}
     </ModalContext.Provider>
   );
 };

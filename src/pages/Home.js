@@ -22,31 +22,42 @@ const Home = () => {
 
   const { show, openModal, closeModal } = useContext(ModalContext);
 
-  let err, response;
-
   const onChangeInput = e => setText(e.target.value);
 
+  /**
+   * searchUsers function
+   * @desc when onKeyUp call this function
+   * which call searchUser() method from api/endPoints
+   * to get users response and update state with response.data.items
+   */
   const searchUsers = async () => {
     setState({ ...state, loading: true });
-    if (state.text === "") {
+    // If input value null update users with empty array
+    if (text === "") {
       return setState({ ...state, users: [], loading: false });
     }
 
-    [err, response] = await searchUser(text);
+    const [err, response] = await searchUser(text);
     if (err) return err.resopnse;
 
     setState({ ...state, users: response.data.items, loading: false });
   };
 
+  /**
+   * singleUser function
+   * @desc when user click user card, trigger singleUser
+   * function which call two api methods from api/endPoints
+   * to update state {user} object and [repos] array.
+   */
   const singleUser = async user => {
     openModal();
     setState({ ...state, userLoading: true });
 
     const [errorUser, responseUser] = await getUser(user.login);
-
     const [errorRepos, responseRepos] = await getUserRepos(user.login);
 
     if (errorUser || errorRepos) return;
+
     setState({
       ...state,
       user: responseUser.data,
