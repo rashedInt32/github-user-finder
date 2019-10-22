@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { searchUser, getUser, getUserRepos } from "../api/endPoints";
 
-import { ModalContext } from "../context/modalContext";
+import { ModalContext } from "../context/ModalContext";
 
 import WithLoading from "../hoc/WithLoading";
 import Search from "../components/Search";
