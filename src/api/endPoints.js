@@ -1,6 +1,6 @@
 import to from 'await-to-js';
 import { config } from '../config/config';
-import { http } from '../http';
+import { http } from '../http/http';
 
 
 const searchUser = async user => await to(
