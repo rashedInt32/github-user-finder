@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 
 import { searchUser, getUser, getUserRepos } from "../api/endPoints";
-
 import { ModalContext } from "../context/ModalContext";
 
 import WithLoading from "../hoc/WithLoading";

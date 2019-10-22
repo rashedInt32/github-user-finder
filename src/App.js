@@ -1,19 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import Routes from './routes/router';
-import ModalContextProvider from './context/ModalContext';
+import Routes from "./routes/router";
+import ModalContextProvider from "./context/ModalContext";
 
+import "./App.css";
 
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <ModalContextProvider>
-        <Routes />
-      </ModalContextProvider>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <ModalContextProvider>
+      <Routes />
+    </ModalContextProvider>
+  </div>
+);
 
 export default App;

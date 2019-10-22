@@ -1,10 +1,10 @@
-import React from 'react';
-import RepoCard from './RepoCard';
+import React from "react";
+import RepoCard from "./RepoCard";
 
-const UserDetails = (props) => {
+const UserDetails = props => {
   const style = {
     background: `url(${props.avatar}) center center no-repeat`,
-    backgroundSize: 'cover'
+    backgroundSize: "cover"
   };
 
   return (
@@ -52,11 +52,10 @@ const UserDetails = (props) => {
             description={repo.description}
             language={repo.language}
           />
-
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default UserDetails;
